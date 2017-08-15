@@ -11,5 +11,10 @@
             "name": "xtlsoft",
             "email": "xtlsoft@126.com"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+            "Coroutine\\": "./"
+        }
+    }
 }

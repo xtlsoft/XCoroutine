@@ -1,0 +1,15 @@
+{
+    "name": "xtlsoft/xcoroutine",
+    "description": "The PHP Coroutine.",
+    "type": "library",
+    "require": {
+        "php": ">=5.5"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "xtlsoft",
+            "email": "xtlsoft@126.com"
+        }
+    ]
+}

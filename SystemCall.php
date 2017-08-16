@@ -27,6 +27,13 @@
          */
         protected $callback;
         
+        /**
+         * $methods
+         * The methods which add by users.
+         * 
+         */
+        protected static $methods = array();
+        
         
         /**
          * function __construct()
@@ -58,6 +65,51 @@
             $callback = $this->callback;
             
             return $callback($task, $Scheduler);
+            
+        }
+        
+        /**
+         * static function __callStatic()
+         * Handler for Users' methods.
+         * 
+         * @param String $name The method name.
+         * @param Mixed[Array] $arg The Argruments.
+         * 
+         * @return Mixed
+         * 
+         */
+        public static function __callStatic($name, $arg){
+            
+            //Proccess the argrument into String.
+            $arg = implode(", ", $arg);
+            
+            //See If $name exists.
+            if(!isset(self::$methods[$name])){
+                throw new \Exception("Call to undefined function on SystemCall.");
+                return false;
+            }
+            
+            //Get the function.
+            $func = self::$methods[$name];
+            
+            //Call the function.
+            return $func($arg);
+            
+        }
+        
+        /**
+         * static function assign()
+         * Assign a processer to a Method.
+         * 
+         * @param String $name The method name.
+         * @param Callable $callback The processer.
+         * 
+         * @return bool
+         * 
+         */
+        public static function assign($name, callable $callback){
+            
+            return self::$methods[$name] = $callback;
             
         }
         

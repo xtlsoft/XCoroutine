@@ -42,6 +42,13 @@
         protected $taskQueue;
         
         /**
+         * $method
+         * The method defined by users.
+         * 
+         */
+        protected $method;
+        
+        /**
          * function __construct()
          * The constructor.
          * 
@@ -52,6 +59,9 @@
             
             //Init the Queue.
             $this->taskQueue = new \SplQueue();
+            
+            //Init the Method.
+            $this->method = new \Coroutine\DynamicObject();
             
         }
         

@@ -64,7 +64,7 @@
          * @return bool
          * 
          */
-        public function __set($key){
+        public function __isset($key){
             
             return isset($this->v[$key]);
             
@@ -79,7 +79,7 @@
          * @return void
          * 
          */
-        public function __set($key, $value){
+        public function __unset($key){
             
             unset($this->v[$key]);
             
@@ -97,10 +97,11 @@
          */
         public function __call($name, $args){
             
-            $args = implode(", ", $args);
+            $args = implode("\", \"", $args);
+            $args = "\"".$args."\"";
             $func = $this->v[$name];
             
-            return $func($args);
+            return eval("return \$func($args);");
             
         }
         

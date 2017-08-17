@@ -14,12 +14,13 @@
     
     class Autoload {
         
-        public function load($name){
+        public static function load($name){
             
             $name = str_replace("\\","/",$name);
+            $name = str_replace("Coroutine/","",$name);
             
             if(is_file(__DIR__.'/'.$name.'.php')){
-                require_once(is_file(__DIR__.'/'.$name.'.php'));
+                require_once(__DIR__.'/'.$name.'.php');
             }
             
         }

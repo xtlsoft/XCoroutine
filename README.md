@@ -8,7 +8,8 @@ composer require xtlsoft/xcoroutine
 - Task: 任务实例。您可以向里面传入一个Generator，然后通过我们的封装对他进行操作。
 - Scheduler: 多任务执行封装。您可以往里面add许多Task，然后执行。每个Task有唯一的ID，一个Task进行部分计算调用yield后，让下一个Task进行计算，以此循环，实现多任务管理。
 - SystemCall: Task之间和Task与Scheduler之间传递数据、互相操作的接口。
-Bold Text
+- DynamicObject: 动态编程类，让你的类支持动态定义/销毁变量和方法。
+
 ## Usage 使用
 1. 初识yield
     例子：
@@ -145,4 +146,32 @@ Bold Text
         $scheduler->newTask(TaskExample(3));
         
         $scheduler->run();
+    ```
+5. DynamicObject 使用
+    例子：
+    ```php
+    <?php
+        require("vendor/autoload.php");
+        use Coroutine\DynamicObject;
+        
+        $obj = new DynamicObject;
+        
+        $obj->abcd = 123;
+        
+        $obj->myFunc = function($a) use ($obj){
+            return ("\$a * abcd = ".($a * $obj->abcd)."<br />\n");
+        };
+        
+        echo $obj->myFunc(2);
+        
+        unset($obj->abcd);
+        
+        echo $obj->myFunc(1);
+        
+        $obj->myFunc = function($a, $b){
+            return ("\$a + \$b = ".($a+$b)."<br />\n");
+        };
+        
+        $obj->myFunc(123,321);
+        
     ```
